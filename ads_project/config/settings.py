@@ -29,8 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-
     'ads.apps.AdsConfig',
+    'mptt',
 
 ]
 
