@@ -62,6 +62,8 @@ class Advertisement(models.Model):
     telephone = models.CharField(verbose_name='Телефон', max_length=12)
     city = models.ForeignKey(City, verbose_name='Город',
                              on_delete=models.PROTECT)
+    img = models.ImageField(verbose_name="Изображение",
+                            upload_to='photo/%Y/%m/%d', null=True)
     slug = models.SlugField(verbose_name='Слаг', unique=True)
 
     def __str__(self) -> str:
@@ -79,14 +81,14 @@ class Comments(models.Model):
     user = models.CharField(verbose_name="Имя", max_length=100)
     text = models.TextField(verbose_name="Текст", max_length=5000)
     perents = models.ForeignKey(
-        'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True)
+        'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True,related_name='children')
     advertisement = models.ForeignKey(
-        Advertisement, verbose_name="Объявление", on_delete=models.CASCADE)
+        Advertisement, verbose_name="Объявление", on_delete=models.CASCADE, related_name='comments')
     create_at = models.DateTimeField(
         verbose_name="Дата комментария", auto_now_add=True, null=True)
 
     def __str__(self) -> str:
-        return f"{self.user}-{self.advertisement}"
+        return f"{self.user}"
 
     class Meta:
         verbose_name = "Комментарий"
