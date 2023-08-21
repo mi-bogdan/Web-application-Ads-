@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Advertisement, Category, Comments, Like
+from .models import Advertisement, Category, Comments, Like, ViolationReport
 
 
 class FilterCommentsListSerializer(serializers.ListSerializer):
@@ -62,4 +62,12 @@ class AdvertisementDeteilSerializers(serializers.ModelSerializer):
 class LikeSerializers(serializers.ModelSerializer):
     class Meta:
         model = Like
+        fields = '__all__'
+
+
+class ViolationReportSerializers(serializers.ModelSerializer):
+    # the_complainer_user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = ViolationReport
         fields = '__all__'

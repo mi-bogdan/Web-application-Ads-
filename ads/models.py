@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,AbstractUser
 from mptt.models import TreeForeignKey, MPTTModel
+
 
 
 class Ip(models.Model):
@@ -31,6 +32,7 @@ class Category(MPTTModel):
 
 
 class City(models.Model):
+    """Города"""
     title = models.CharField(verbose_name='Город', max_length=150)
 
     def __str__(self) -> str:
@@ -133,7 +135,7 @@ class ViolationReport(models.Model):
     description_of_the_violation = models.TextField(
         verbose_name='Описание нарушения')
     report_status = models.CharField(
-        verbose_name='Статус нарушения', choices=REPORT_STATUS, max_length=3)
+        verbose_name='Статус нарушения', choices=REPORT_STATUS,default='отк', max_length=3)
 
     def __str__(self) -> str:
         return f'{self.advertisement}-{self.the_complainer_user}'
@@ -191,6 +193,9 @@ class Messages(models.Model):
         return f'{self.text}-{self.recipient}'
 
     class Meta:
-        verbose_name = "Сообщение"
+        verbose_name = "Сообщение" 
         verbose_name_plural = "Сообщения"
         db_table = "Messages"
+
+
+
