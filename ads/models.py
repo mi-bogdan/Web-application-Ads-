@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User,AbstractUser
+from django.contrib.auth.models import User
 from mptt.models import TreeForeignKey, MPTTModel
-
 
 
 class Ip(models.Model):
@@ -80,10 +79,11 @@ class Advertisement(models.Model):
 class Comments(models.Model):
     """Комментарии"""
 
-    user = models.CharField(verbose_name="Имя", max_length=100)
+    user = models.ForeignKey(
+        User, verbose_name='Пользователь', on_delete=models.PROTECT)
     text = models.TextField(verbose_name="Текст", max_length=5000)
     perents = models.ForeignKey(
-        'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True,related_name='children')
+        'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
     advertisement = models.ForeignKey(
         Advertisement, verbose_name="Объявление", on_delete=models.CASCADE, related_name='comments')
     create_at = models.DateTimeField(
@@ -135,7 +135,9 @@ class ViolationReport(models.Model):
     description_of_the_violation = models.TextField(
         verbose_name='Описание нарушения')
     report_status = models.CharField(
-        verbose_name='Статус нарушения', choices=REPORT_STATUS,default='отк', max_length=3)
+        verbose_name='Статус нарушения', choices=REPORT_STATUS, default='отк', max_length=3)
+    create_at = models.DateTimeField(
+        verbose_name="Дата нарушения", auto_now_add=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.advertisement}-{self.the_complainer_user}'
@@ -147,7 +149,7 @@ class ViolationReport(models.Model):
 
 
 class ImageAdvertisement(models.Model):
-    """Изображение к продуктам"""
+    """Изображение к объявлению"""
 
     img = models.ImageField(verbose_name="Изображение объявления",
                             upload_to='advertisement_images/%Y/%m/%d')
@@ -178,24 +180,6 @@ class Like(models.Model):
         verbose_name = "Лайк"
         verbose_name_plural = "Лайки"
         db_table = "Like"
-
-
-class Messages(models.Model):
-    """Сообщения"""
-    text = models.TextField(verbose_name='Текст сообщения')
-    sender = models.ForeignKey(
-        User, verbose_name='Отправитель', on_delete=models.SET_NULL, null=True, related_name='user_sender')
-    recipient = models.ForeignKey(
-        User, verbose_name='Получатель', on_delete=models.SET_NULL, null=True, related_name='user_recipient')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return f'{self.text}-{self.recipient}'
-
-    class Meta:
-        verbose_name = "Сообщение" 
-        verbose_name_plural = "Сообщения"
-        db_table = "Messages"
 
 
 

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
 
 
     'ads.apps.AdsConfig',
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'mptt',
     'djoser',
+    
 
 ]
 
@@ -141,4 +143,16 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_ID_FIELD': 'id',
+    'SERIALIZERS': {
+        'user_create': 'ads.serializers.CustomUserCreateSerializer',
+        
+    },
 }

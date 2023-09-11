@@ -1,4 +1,6 @@
-from ads.models import Ip
+from ads.models import Ip, Advertisement
+
+from django_filters import rest_framework as filters
 
 
 def get_client_ip(request) -> str:
@@ -20,3 +22,12 @@ def add_ip_advertisement(ip, advertisement) -> None:
     else:
         Ip.objects.create(ip=ip)
         advertisement.views.add(Ip.objects.get(ip=ip))
+
+
+class FiltersPriceAds(filters.FilterSet):
+    """Фильтрация объявления по цене"""
+    price = filters.RangeFilter(field_name='price')
+
+    class Meta:
+        model = Advertisement
+        fields = ['price']

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
-from .models import Category, Advertisement, ImageAdvertisement, City, Messages, Like, Ip, Comments, Favourites, ViolationReport
+from .models import Category, Advertisement, ImageAdvertisement, City, Like, Ip, Comments, Favourites, ViolationReport
 
 
 class CategoryAdmin(MPTTModelAdmin):
@@ -27,10 +27,6 @@ class CityAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title')
 
 
-@admin.register(Messages)
-class MessagesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'text', 'sender', 'recipient', 'created_at')
-    list_display_links = ('id', 'sender', 'recipient')
 
 
 @admin.register(Like)
@@ -55,16 +51,20 @@ class CommentsAdmin(admin.ModelAdmin):
 @admin.register(ViolationReport)
 class ViolationReportAdmin(admin.ModelAdmin):
     list_display = ('id', 'the_complainer_user', 'advertisement',
-                    'types_of_violations', 'description_of_the_violation', 'report_status')
+                    'types_of_violations', 'description_of_the_violation', 'report_status','create_at')
     list_display_links = ('id', 'the_complainer_user', 'advertisement')
+
 
 @admin.register(Favourites)
 class FavouritesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user','advertisement')
+    list_display = ('id', 'user', 'advertisement')
     list_display_links = ('id', 'user')
 
 
 @admin.register(ImageAdvertisement)
 class ImageAdvertisementAdmin(admin.ModelAdmin):
-    list_display = ('id','advertisement')
+    list_display = ('id', 'advertisement')
     list_display_links = ('id', 'advertisement')
+
+
+
