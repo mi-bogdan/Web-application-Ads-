@@ -12,7 +12,7 @@ API объявлений - это проект, разработанный с и
 
 **Стек:**
 - Python 
-- Django 
+- Django rest framework
 - PostgreSQL
 - Docker
 
