@@ -63,13 +63,6 @@ class LikeAPIView(APIView):
 
     permission_classes = (permissions.IsAuthenticated,)
 
-    # def post(self, request, pk):
-    #     serializer = LikeSerializers(data={'user': request.user.id, 'ads': pk})
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     def put(self, request, pk):
         user = request.user.id
         ads = Advertisement.objects.get(pk=pk)
