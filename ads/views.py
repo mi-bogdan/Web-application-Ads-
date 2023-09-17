@@ -27,18 +27,23 @@ class AdvertisementDeteilApi(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, pk):
-        advertisement = Advertisement.objects.annotate(
-            count_views=Count('views')).get(pk=pk)
-        ip = get_client_ip(request)
-        add_ip_advertisement(ip, advertisement)
+        try:
+            advertisement = Advertisement.objects.annotate(
+                count_views=Count('views')).get(pk=pk)
+            ip = get_client_ip(request)
+            add_ip_advertisement(ip, advertisement)
 
-        serealizers = AdvertisementDeteilSerializers(advertisement)
-        return Response(serealizers.data)
+            serealizers = AdvertisementDeteilSerializers(advertisement)
+            return Response(serealizers.data, status=status.HTTP_200_OK)
+        except Advertisement.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class CreateAdvertisementApi(generics.CreateAPIView):
     """Добавления объявления на сайт"""
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = AdvertisementCreateSerializers
+    queryset = Advertisement.objects.all()
 
 
 class CommentsCreateApi(APIView):
@@ -58,12 +63,12 @@ class LikeAPIView(APIView):
 
     permission_classes = (permissions.IsAuthenticated,)
 
-    def post(self, request, pk):
-        serializer = LikeSerializers(data={'user': request.user.id, 'ads': pk})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request, pk):
+    #     serializer = LikeSerializers(data={'user': request.user.id, 'ads': pk})
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         user = request.user.id
@@ -138,7 +143,7 @@ class CategoryView(generics.ListAPIView):
 
 
 class SortedCategoryAdsView(generics.ListAPIView):
-    """Вывод объявлений по категории и фильтрация по цене"""
+    """Вывод объявлений по категориям и фильтрация по цене"""
     permission_classes = (permissions.AllowAny,)
     serializer_class = AdvertisementListSerializers
     filter_backends = (DjangoFilterBackend,)
