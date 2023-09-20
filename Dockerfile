@@ -1,17 +1,12 @@
-FROM python 
+FROM python:3.11
 
-WORKDIR /project_ads
+ENV PYTHONDONTWRITEBYTECODE=1 
+ENV PYTHONUNBUFFERED=1 
 
-COPY requirements.txt requirements.txt
+WORKDIR /code 
 
-RUN python -m venv venv
+COPY requirements.txt /code/
 
-ENV PATH="/project_ads/venv/bin:$PATH"
+RUN pip install -r requirements.txt 
 
-RUN pip3 install -r requirements.txt 
-
-COPY . .
-
-EXPOSE 8000
-
-CMD [ "python3","manage.py","runserver" ]
+COPY . /code/ 
