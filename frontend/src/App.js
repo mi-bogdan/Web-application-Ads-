@@ -103,19 +103,13 @@ class CategoryList extends React.Component {
 
       <div className='category-list'>
         {this.state.details.map((output, id) => (
-          <div  key={id} >
+          <div key={id} >
             <div>
               <Link className='category' to={`/category/${output.id}`}>{output.title}</Link>
             </div>
           </div>
         ))}
-
-
-
       </div>
-
-
     );
   }
-
 }
