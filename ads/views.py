@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status, permissions
 from rest_framework.decorators import api_view
+from rest_framework.authentication import TokenAuthentication
 
 from service.service import get_client_ip, add_ip_advertisement, FiltersPriceAds
 from django.db.models import Count
@@ -147,3 +148,16 @@ class SortedCategoryAdsView(generics.ListAPIView):
         ads = Advertisement.objects.filter(category__id=category_id)
         filtered_ads = self.filter_queryset(ads)
         return filtered_ads
+
+
+class CheckLogin(APIView):
+    """Проверка вошел ли пользователь в систему"""
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        # Проверка авторизованности пользователя
+        if request.user.is_authenticated:
+            return Response({'authenticated': True})
+        else:
+            return Response({'authenticated': False})

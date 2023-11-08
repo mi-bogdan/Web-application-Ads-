@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import AdvertisementListApi, AdvertisementDeteilApi, CommentsCreateApi, LikeAPIView, ViolationReportView, AddFavouritesView, FavouritesView, remove_favorites, CreateAdvertisementApi, CategoryView, SortedCategoryAdsView
+from .views import AdvertisementListApi, AdvertisementDeteilApi, CommentsCreateApi, LikeAPIView, ViolationReportView, AddFavouritesView, FavouritesView, remove_favorites, CreateAdvertisementApi, CategoryView, SortedCategoryAdsView, CheckLogin
 
 
 urlpatterns = [
@@ -14,6 +14,6 @@ urlpatterns = [
     path('favorite-ads/', FavouritesView.as_view(), name='favorite-ads'),
     path('delete-favorite/<pk>/', remove_favorites, name='remove-favorite'),
     path('categories/', CategoryView.as_view(), name='categories'),
-    path('ads-categories/<pk>/',
-         SortedCategoryAdsView.as_view(), name='ads-categories'),
+    path('ads-categories/<pk>/', SortedCategoryAdsView.as_view(), name='ads-categories'),
+    path('check_login/', CheckLogin.as_view(), name='check-login'),
 ]

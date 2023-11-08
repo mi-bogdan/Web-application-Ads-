@@ -51,6 +51,8 @@ class CommentsCreateSerializers(serializers.ModelSerializer):
 class CommentsSerializers(serializers.ModelSerializer):
     """Добавления комментария к объявлению"""
     children = RecursiveSerializer(many=True)
+    user = serializers.SlugRelatedField(
+            slug_field='first_name', read_only=True)
 
     class Meta:
         list_serializer_class = FilterCommentsListSerializer
@@ -109,7 +111,7 @@ class GetFavoritesAdsSerializer(serializers.ModelSerializer):
     """Вывод изранных объявлений"""
     class Meta:
         model = Advertisement
-        fields = ('id','title', 'img','price')
+        fields = ('id', 'title', 'img', 'price')
 
 
 class GetFavouritesSerializer(serializers.ModelSerializer):
@@ -119,6 +121,7 @@ class GetFavouritesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favourites
         fields = ('id', 'advertisement',)
+
 
 class CategorySerializer(serializers.ModelSerializer):
     subcategories = serializers.SerializerMethodField(read_only=True)

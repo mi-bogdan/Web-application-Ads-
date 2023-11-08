@@ -1,0 +1,226 @@
+.header_div {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.container {
+    margin: 0px 50px 0px 50px;
+}
+
+
+.card {
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 16px;
+}
+
+.card-image {
+    width: 200px;
+    height: auto;
+    border-radius: 8px 0 0 8px;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-description {
+    margin: 0 0 16px;
+}
+
+.card-price {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-button {
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+}
+
+
+
+/* Стили для контейнера */
+.header-container {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Стили для логотипа */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Стили для навигационной панели */
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Стили для пунктов навигационной панели */
+.navbar li {
+    margin: 0 10px;
+}
+
+/* Стили для ссылок в пунктах навигационной панели */
+.navbar li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Стили для активной ссылки */
+.active {
+    color: #0940be;
+    text-decoration: none;
+}
+.active:hover {
+    color: #0f53f1;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.container-detail {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.img-detail {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.telephone {
+    color: #999;
+}
+
+.price {
+    font-weight: bold;
+    color: #333;
+}
+
+.date {
+    font-style: italic;
+    color: #888;
+}
+
+
+.chek-auth{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 0px 30px;
+}
+.div-check{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 0px 30px;
+}
+
+.p-div{
+    padding: 0px 10px;
+}
+
+.active-check{
+    color: #c42603;
+    text-decoration: none;
+
+}
+.active-check:hover{
+    color: #f15937;
+}
+
+.div-detail{
+    display:  flex;
+
+}
+
+.p-detail{
+    padding: 0px 10px;
+}
+
+
+
+.comment-container {
+    margin-left: 20px;
+  }
+  
+  .comment-container p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .comment-container p:first-child {
+    font-weight: bold;
+  }
+  
+  .comment-container p:last-child {
+    color: #999;
+  }
+
+.category-list{
+    display: flex;
+}
+
+.category{
+    color: rgb(219, 93, 20);
+    text-decoration: none;
+    padding: 0px 10px;
+}
+
+.category:hover{
+    color: rgb(255, 110, 27);
+   
+ 
+}
