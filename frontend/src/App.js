@@ -119,39 +119,3 @@ class CategoryList extends React.Component {
   }
 
 }
-
-// class App extends React.Component {
-//   render() {
-//     return (
-//         <Router>
-//         <div>
-//             <div className='header'>
-//             <div className="header-container">
-//                 <p className="logo">ЛОГОТИП</p>
-//             </div>
-//             <nav>
-//             <ul className="navbar">
-//                 <li>
-//                     <Link to="/" className="active">Главная</Link>
-//                 </li>
-//                 <li>
-//                     <Link to="/auth">Войти</Link>
-//                 </li>
-//             </ul>
-//             </nav>
-//             </div>
-
-//           <Routes>
-//             <Route path="/" element={<Home />} />
-//             <Route path="/auth" element={<Login />} />
-//             <Route path="/register" element={<Register />} />
-//             <Route path="/detail/:id" element={<Detail />} />
-
-//           </Routes>
-//         </div>
-//       </Router>
-//     );
-//   }
-// }
-
-// export default App;
